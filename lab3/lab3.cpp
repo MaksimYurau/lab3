@@ -1,20 +1,36 @@
-﻿// lab3.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include <iostream>
+#include <string>
+#include <stdexcept>
 
-#include <iostream>
+class LongInteger {
+private:
+    long long high;
+    long long low;
 
-int main()
-{
-    std::cout << "Hello World!\n";
+public:
+    LongInteger() : high(0), low(0) {}
+
+    LongInteger(long long h, long long l) : high(h), low(l) {}
+
+    LongInteger(const std::string& numberString) {
+        try {
+            if (numberString.length() > 9) {
+                high = std::stoll(numberString.substr(0, numberString.length() - 9));
+                low = std::stoll(numberString.substr(numberString.length() - 9));
+            }
+            else {
+                high = 0;
+                low = std::stoll(numberString);
+            }
+        }
+        catch (const std::out_of_range& e) {
+            std::cerr << "Ошибка: " << e.what() << std::endl;
+            high = 0;
+            low = 0;
+        }
+    }
+};
+
+int main() {
+    
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
