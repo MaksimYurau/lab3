@@ -138,5 +138,43 @@ std::ostream& operator << (std::ostream& os, const LongInteger& number) {
 }
 
 int main() {
-    
+    setlocale(0, "Ru");
+
+    LongInteger a;
+    LongInteger b;
+
+    std::cout << "Введите первое число: ";
+    std::cin >> a;
+
+    std::cout << "Введите второе число: ";
+    std::cin >> b;
+
+    std::cout << "a: " << a << std::endl;
+    std::cout << "b: " << b << std::endl;
+
+    if (a > b)
+        std::cout << "a > b" << std::endl;
+    else if (a == b)
+        std::cout << "a == b" << std::endl;
+    else
+        std::cout << "a < b" << std::endl;
+
+    LongInteger c = a + b;
+    std::cout << "a + b = " << c << std::endl;
+
+    LongInteger d = a - b;
+    std::cout << "a - b = " << d << std::endl;
+
+    LongInteger e = a * b;
+    std::cout << "a * b = " << e << std::endl;
+
+    try {
+        LongInteger f = a / b;
+        std::cout << "a / b = " << f << std::endl;
+    }
+    catch (const std::runtime_error& e) {
+        std::cerr << "Ошибка: " << e.what() << std::endl;
+    }
+
+    return 0;
 }
