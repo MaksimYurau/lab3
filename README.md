@@ -29,4 +29,4 @@ https://github.com/MaksimYurau/lab3/commits/master
 
 Видеофайл с демонстрацией работы программы:
 
-
+https://drive.google.com/file/d/1En7ihjBWY_60Oo6ThrYBbdCD_9mwd5XN/view?usp=sharing
