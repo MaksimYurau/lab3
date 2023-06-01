@@ -49,6 +49,69 @@ public:
     bool operator == (const LongInteger& other) const {
         return high == other.high && low == other.low;
     }
+
+    LongInteger operator + (const LongInteger& other) const {
+        LongInteger result;
+        result.low = low + other.low;
+        result.high = high + other.high + (result.low / 1000000000);
+        result.low %= 1000000000;
+        return result;
+    }
+
+    LongInteger operator - (const LongInteger& other) const {
+        LongInteger result;
+        result.low = low - other.low;
+        if (low < other.low)
+            result.high = high - other.high - 1;
+        else
+            result.high = high - other.high;
+        if (result.low < 0) {
+            result.low += 1000000000;
+            result.high--;
+        }
+        return result;
+    }
+
+    LongInteger operator * (const LongInteger& other) const {
+        LongInteger result;
+        result.high = high * other.high;
+        result.low = low * other.low;
+        result.high += low * other.high + high * other.low;
+        result.high += result.low / 1000000000;
+        result.low %= 1000000000;
+        return result;
+    }
+
+    LongInteger operator / (const LongInteger& other) const {
+        if (other == LongInteger())
+            throw std::runtime_error("Деление на нуль");
+
+        LongInteger result;
+        LongInteger remainder = *this;
+        LongInteger divisor = other;
+
+        if (divisor > remainder)
+            return LongInteger();
+
+        LongInteger quotient;
+
+        while (remainder >= divisor) {
+            LongInteger tempDivisor = divisor;
+            LongInteger tempQuotient(1, 0);
+
+            while (tempDivisor * LongInteger(10, 0) <= remainder) {
+                tempDivisor = tempDivisor * LongInteger(10, 0);
+                tempQuotient = tempQuotient * LongInteger(10, 0);
+            }
+
+            while (tempDivisor <= remainder) {
+                remainder = remainder - tempDivisor;
+                quotient = quotient + tempQuotient;
+            }
+        }
+
+        return quotient;
+    }
 };
 
 int main() {
