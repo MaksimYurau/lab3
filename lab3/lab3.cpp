@@ -112,6 +112,14 @@ public:
 
         return quotient;
     }
+
+    std::string toString() const {
+        std::string result;
+        if (high != 0)
+            result = std::to_string(high);
+        result += std::to_string(low);
+        return result;
+    }
 };
 
 int main() {
