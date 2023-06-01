@@ -120,7 +120,22 @@ public:
         result += std::to_string(low);
         return result;
     }
+
+    friend std::istream& operator >> (std::istream& is, LongInteger& number);
+    friend std::ostream& operator << (std::ostream& os, const LongInteger& number);
 };
+
+std::istream& operator >> (std::istream& is, LongInteger& number) {
+    std::string input;
+    is >> input;
+    number = LongInteger(input);
+    return is;
+}
+
+std::ostream& operator << (std::ostream& os, const LongInteger& number) {
+    os << number.toString();
+    return os;
+}
 
 int main() {
     
