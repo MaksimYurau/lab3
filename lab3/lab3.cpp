@@ -29,6 +29,26 @@ public:
             low = 0;
         }
     }
+
+    bool operator > (const LongInteger& other) const {
+        return (high > other.high) || (high == other.high && low > other.low);
+    }
+
+    bool operator < (const LongInteger& other) const {
+        return (high < other.high) || (high == other.high && low < other.low);
+    }
+
+    bool operator >= (const LongInteger& other) const {
+        return (*this > other) || (*this == other);
+    }
+
+    bool operator <= (const LongInteger& other) const {
+        return (*this < other) || (*this == other);
+    }
+
+    bool operator == (const LongInteger& other) const {
+        return high == other.high && low == other.low;
+    }
 };
 
 int main() {
